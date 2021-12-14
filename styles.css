@@ -6,3 +6,78 @@ dark-blue - #134d71;
 white - #ffffff;
 black - #000000;
 */
+html {
+  height: 100%
+}
+
+body {
+  height: 100%
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(#134d71, #78a7c6, #f7e4bf);
+}
+
+body {
+  text-align: center;
+}
+
+h1 {
+  color: #ffffff;
+  margin-bottom: 125px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff;
+}
+
+form {
+  margin: 200px;
+}
+
+.box {
+  background-color: #ffffff
+}
+
+.box {
+  box-sizing: content-box;
+  width: 40%;
+  height: 15%;
+  border-radius: 5px;
+  padding: 1%;
+  margin: auto;
+}
+
+#image-box {
+  background-color:
+}
+
+#image-box {
+  box-sizing: content-box;
+  width: 80%;
+  height: 125px;
+  border-radius: 5px;
+  padding: 1%;
+}
+
+
+button {
+  padding: 1%;
+  margin: 20px;
+}
+
+.recieve-message {
+  background-color: #134d71;
+  color: #ffffff;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 2px;
+  border-radius: 5px;
+  margin-top; 20px;
+}
