@@ -80,8 +80,10 @@ label {
   border-radius: 5px;
   padding: 1%;
   margin: auto;
+  line-height: 125px;
+  vertical-align: middle;
   font-family: Quicksand;
-  font-size: 20px
+  font-size: 20px;
 }
 
 img {
