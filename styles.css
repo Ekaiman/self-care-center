@@ -25,7 +25,9 @@ body {
 
 h1 {
   color: #ffffff;
+  margin-top: 50px;
   margin-bottom: 125px;
+  font-family: Quicksand;
 }
 
 h1 {
@@ -35,10 +37,23 @@ h1 {
 h2 {
   text-align: center;
   color: #ffffff;
+  font-family: Quicksand;
+
 }
 
 form {
   margin: 200px;
+}
+
+label {
+  margin-right:40px;
+  margin-left: 5px;
+  font-family: sans-serif;
+  font-style: italic;
+}
+
+#mantra {
+  margin-left: 70px;
 }
 
 .box {
@@ -66,6 +81,11 @@ form {
   padding: 1%;
 }
 
+img {
+  height: 100px;
+  width: 100px;
+}
+
 
 button {
   padding: 1%;
@@ -78,6 +98,7 @@ button {
   padding-left: 30px;
   padding-right: 30px;
   border: 2px;
-  border-radius: 5px;
-  margin-top; 20px;
+  border-radius: 3px;
+  margin-top: 20px;
+  /* font-family: sans-serif; */
 }
