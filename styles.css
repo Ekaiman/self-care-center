@@ -11,15 +11,8 @@ html {
 }
 
 body {
-  height: 100%
-  margin: 0;
-}
-
-body {
+  height: 100%;
   background: linear-gradient(#134d71, #78a7c6, #f7e4bf);
-}
-
-body {
   text-align: center;
 }
 
@@ -30,16 +23,11 @@ h1 {
   font-family: Quicksand;
 }
 
-h1 {
-  text-align: center;
-}
-
 h2 {
   text-align: center;
   color: #ffffff;
   font-family: Quicksand;
 }
-
 
 form {
   margin: 150px;
@@ -57,11 +45,7 @@ label {
 }
 
 .box {
-  background-color: #ffffff
-}
-
-.box {
-  box-sizing: content-box;
+  background-color: #ffffff;
   width: 500px;
   height: 15%;
   border-radius: 5px;
@@ -69,21 +53,17 @@ label {
   margin: auto;
 }
 
-#image-box {
-  background-color:
-}
+
 
 #image-box {
-  box-sizing: content-box;
   width: 800px;
   height: 125px;
   border-radius: 5px;
-  padding: 1%;
-  margin: auto;
   line-height: 125px;
   vertical-align: middle;
   font-family: Quicksand;
   font-size: 20px;
+
 }
 
 img {
@@ -104,6 +84,17 @@ button {
 }
 
 .recieve-message {
+  background-color: #134d71;
+  color: #ffffff;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 2px;
+  border-radius: 3px;
+  margin-top: 20px;
+}
+
+.delete {
+  margin-bottom: 100px;
   background-color: #134d71;
   color: #ffffff;
   padding-left: 30px;
