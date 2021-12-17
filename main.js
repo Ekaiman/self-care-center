@@ -32,14 +32,15 @@ var mantras = [
 "I am the sky, the rest is weather.",
 ];
 var messageButton = document.querySelector(".recieve-message");
-var affirmationRadio = document.querySelector("#affirmation");
-var mantraRadio = document.querySelector("#mantra");
 var displayMessageBox = document.querySelector("#image-box")
 var image = document.querySelector(".meditate")
 var deleteButton = document.querySelector('.delete')
+var message = document.querySelector('.message')
+
 
 messageButton.addEventListener("click", displayMessage);
 messageButton.addEventListener("click", deployDeleteButton);
+deleteButton.addEventListener("click", deleteMessage)
 
 
 function getRandomIndex(array) {
@@ -54,19 +55,49 @@ function show(item) {
   item.classList.remove("hidden")
 }
 
+var currentAffirmation
+var currentMantra
 
 function displayMessage() {
   event.preventDefault(event);
-  hide(image);
-  if (affirmation.checked) {
-    displayMessageBox.innerText = affirmations[getRandomIndex(affirmations)]
-  } else if (mantra.checked) {
-    displayMessageBox.innerText = mantras[getRandomIndex(mantras)]
+  currentAffirmation = affirmations[getRandomIndex(affirmations)]
+  currentMantra = mantras[getRandomIndex(mantras)]
+  if (affirmation.checked || mantra.checked) {
+    hide(image)
+    show(message)
   }
+  if (affirmation.checked) {
+    message.innerText = currentAffirmation
+  } else if (mantra.checked) {
+    message.innerText = currentMantra
+  }
+
 }
 
 function deployDeleteButton() {
   if (affirmation.checked || mantra.checked) {
     show(deleteButton)
   }
+}
+
+function deleteMessage() {
+  event.preventDefault(event)
+  if (affirmation.checked) {
+    for (var i = 0; i < affirmations.length; i ++) {
+      if (affirmations[i] === currentAffirmation) {
+        affirmations.splice(i, 1);
+      }
+    }
+  }
+  if (mantra.checked) {
+    for (var i = 0; i < mantras.length; i ++) {
+      if (mantras[i] === currentMantra) {
+        mantras.splice(i, 1)
+      }
+    }
+  }
+  hide(message)
+  alert("Sorry, you won't have to see that message again.")
+  show(image)
+  hide(deleteButton)
 }
