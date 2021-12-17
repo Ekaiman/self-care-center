@@ -1,48 +1,53 @@
 var affirmations = [
 "I forgive myself and set myself free.",
-"I believe I can be all that I want to be.",
-"I am in the process of becoming the best version of myself.",
-"I have the freedom & power to create the life I desire.",
-"I choose to be kind to myself and love myself unconditionally.",
-"My possibilities are endless.",
-"I am worthy of my dreams.",
-"I am enough.",
-"I deserve to be healthy and feel good.",
-"I am full of energy and vitality and my mind is calm and peaceful.",
-"Every day I am getting healthier and stronger.",
-"I honor my body by trusting the signals that it sends me.",
-"I manifest perfect health by making smart choices."
+// "I believe I can be all that I want to be.",
+// "I am in the process of becoming the best version of myself.",
+// "I have the freedom & power to create the life I desire.",
+// "I choose to be kind to myself and love myself unconditionally.",
+// "My possibilities are endless.",
+// "I am worthy of my dreams.",
+// "I am enough.",
+// "I deserve to be healthy and feel good.",
+// "I am full of energy and vitality and my mind is calm and peaceful.",
+// "Every day I am getting healthier and stronger.",
+// "I honor my body by trusting the signals that it sends me.",
+// "I manifest perfect health by making smart choices."
 ];
 
 var mantras = [
 "Breathing in, I send myself love. Breathing out, I send love to someone else.",
-"Don’t let yesterday take up too much of today.",
-"Every day is a second chance.",
-"Tell the truth and love everyone.",
-"I am free from sadness.",
-"I am enough.",
-"In the beginning it is you, in the middle it is you and in the end it is you.",
-"I love myself.",
-"I am present now.",
-"Inhale the future, exhale the past.",
-"This too shall pass.",
-"Yesterday is not today.",
-"The only constant is change.",
-"Onward and upward.",
-"I am the sky, the rest is weather.",
+// "Don’t let yesterday take up too much of today.",
+// "Every day is a second chance.",
+// "Tell the truth and love everyone.",
+// "I am free from sadness.",
+// "I am enough.",
+// "In the beginning it is you, in the middle it is you and in the end it is you.",
+// "I love myself.",
+// "I am present now.",
+// "Inhale the future, exhale the past.",
+// "This too shall pass.",
+// "Yesterday is not today.",
+// "The only constant is change.",
+// "Onward and upward.",
+// "I am the sky, the rest is weather.",
 ];
+
+// >>>QUERY SELECTORS<<<
 var messageButton = document.querySelector(".recieve-message");
-var displayMessageBox = document.querySelector("#image-box")
-var image = document.querySelector(".meditate")
-var deleteButton = document.querySelector('.delete')
-var message = document.querySelector('.message')
-
-
-messageButton.addEventListener("click", displayMessage);
+var displayMessageBox = document.getElementById("image-box");
+var image = document.querySelector(".meditate");
+var deleteButton = document.querySelector('.delete');
+var message = document.querySelector('.message');
+var affirmation = document.getElementById('affirmation');
+var mantra = document.getElementById('mantra');
+var deletedMessage = document.getElementById('deleted-message')
+//>>>EVENT LISTENERS<<<
+messageButton.addEventListener("click", displayMessage)
 messageButton.addEventListener("click", deployDeleteButton);
 deleteButton.addEventListener("click", deleteMessage)
 
 
+//>>> FUNCTIONS <<<
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length)
 };
@@ -55,49 +60,83 @@ function show(item) {
   item.classList.remove("hidden")
 }
 
-var currentAffirmation
-var currentMantra
+
+// >>> GLOBAL VARIABLES<<<
+var currentMessage
+
+function setMessage(affOrMantra) {
+  debugger
+  if (affOrMantra.length > 0) {
+    currentMessage= affOrMantra[getRandomIndex(affOrMantra)]
+    show(deleteButton)
+  } else if (affOrMantra.length === 0) {
+    hide(deleteButton)
+    currentMessage = 'Oops! None of these left!'
+  }
+    message.innerText = currentMessage
+}
+
 
 function displayMessage() {
   event.preventDefault(event);
-  currentAffirmation = affirmations[getRandomIndex(affirmations)]
-  currentMantra = mantras[getRandomIndex(mantras)]
-  if (affirmation.checked || mantra.checked) {
-    hide(image)
-    show(message)
+  if (affirmation.checked || mantra.checked){
+    if (affirmation.checked) {
+      setMessage(affirmations)
+    } else if (mantra.checked) {
+      setMessage(mantras)
   }
-  if (affirmation.checked) {
-    message.innerText = currentAffirmation
-  } else if (mantra.checked) {
-    message.innerText = currentMantra
-  }
-
+  hide(image)
+  show(message)
+ }
 }
+
+// function setAffirmation() {
+//   if (affirmations.length > 0) {
+//     currentAffirmation = affirmations[getRandomIndex(affirmations)]
+//   } else if (affirmations.length === 0) {
+//     currentAffirmation = "You are out of affirmations"
+//   }
+//     message.innerText = currentAffirmation
+// }
+//
+// function setMantra() {
+//   if (mantras.length > 0) {
+//     currentMantra = mantras[getRandomIndex(mantras)]
+//   } else if (mantras.length === 0) {
+//     currentMantra = "You are out of mantras"
+//   }
+//     message.innerText = currentMantra
+// }
+
 
 function deployDeleteButton() {
   if (affirmation.checked || mantra.checked) {
+    if (affirmations.length > 0 && mantras.length > 0)
     show(deleteButton)
   }
 }
 
+
+
 function deleteMessage() {
   event.preventDefault(event)
-  if (affirmation.checked) {
-    for (var i = 0; i < affirmations.length; i ++) {
-      if (affirmations[i] === currentAffirmation) {
-        affirmations.splice(i, 1);
-      }
+  for (var i = 0; i < affirmations.length; i ++) {
+    if (affirmations[i] === currentMessage) {
+      affirmations.splice(i, 1);
     }
   }
-  if (mantra.checked) {
-    for (var i = 0; i < mantras.length; i ++) {
-      if (mantras[i] === currentMantra) {
-        mantras.splice(i, 1)
-      }
+  for (var i = 0; i < mantras.length; i ++) {
+    if (mantras[i] === currentMessage) {
+      mantras.splice(i, 1)
     }
   }
   hide(message)
-  alert("Sorry, you won't have to see that message again.")
+  show(deletedMessage)
+  setTimeout('hide(deletedMessage)', 3000)
   show(image)
   hide(deleteButton)
+}
+
+function showDeletedMessage() {
+
 }
