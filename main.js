@@ -44,7 +44,7 @@ var deletedMessage = document.getElementById('deleted-message')
 //>>>EVENT LISTENERS<<<
 messageButton.addEventListener("click", displayMessage)
 messageButton.addEventListener("click", deployDeleteButton);
-deleteButton.addEventListener("click", deleteMessage)
+deleteButton.addEventListener("click", showDeletedMessage)
 
 
 //>>> FUNCTIONS <<<
@@ -64,6 +64,19 @@ function show(item) {
 // >>> GLOBAL VARIABLES<<<
 var currentMessage
 
+function displayMessage() {
+  event.preventDefault(event);
+  if (affirmation.checked || mantra.checked){
+    if (affirmation.checked) {
+      setMessage(affirmations)
+    } else if (mantra.checked) {
+      setMessage(mantras)
+    }
+    hide(image)
+    show(message)
+  }
+}
+
 function setMessage(affOrMantra) {
   debugger
   if (affOrMantra.length > 0) {
@@ -76,19 +89,6 @@ function setMessage(affOrMantra) {
     message.innerText = currentMessage
 }
 
-
-function displayMessage() {
-  event.preventDefault(event);
-  if (affirmation.checked || mantra.checked){
-    if (affirmation.checked) {
-      setMessage(affirmations)
-    } else if (mantra.checked) {
-      setMessage(mantras)
-  }
-  hide(image)
-  show(message)
- }
-}
 
 // function setAffirmation() {
 //   if (affirmations.length > 0) {
@@ -117,26 +117,39 @@ function deployDeleteButton() {
 }
 
 
-
-function deleteMessage() {
+// function deleteMessage() {
+//   event.preventDefault(event)
+//   for (var i = 0; i < affirmations.length; i ++) {
+//     if (affirmations[i] === currentMessage) {
+//       affirmations.splice(i, 1);
+//     }
+//   }
+//   for (var i = 0; i < mantras.length; i ++) {
+//     if (mantras[i] === currentMessage) {
+//       mantras.splice(i, 1)
+//     }
+//   }
+function showDeletedMessage() {
   event.preventDefault(event)
-  for (var i = 0; i < affirmations.length; i ++) {
-    if (affirmations[i] === currentMessage) {
-      affirmations.splice(i, 1);
-    }
+  if (affirmation.checked || mantra.checked){
+    if (affirmation.checked) {
+      removeFromArray(affirmations)
+    } else if (mantra.checked) {
+      removeFromArray(mantras)
   }
-  for (var i = 0; i < mantras.length; i ++) {
-    if (mantras[i] === currentMessage) {
-      mantras.splice(i, 1)
-    }
-  }
+}
   hide(message)
   show(deletedMessage)
-  setTimeout('hide(deletedMessage)', 3000)
+  setTimeout('hide(deletedMessage)'', 3000)
   show(image)
   hide(deleteButton)
 }
 
-function showDeletedMessage() {
 
+function removeFromArray(mantraOrAff) {
+  for ( var i = 0; i < mantraOrAff.length; i++) {
+    if (mantraOrAff[i] === currentMessage){
+      mantraOrAff.splice(i, 1);
+    }
+  }
 }
