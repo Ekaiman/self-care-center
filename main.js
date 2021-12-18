@@ -1,35 +1,35 @@
 var affirmations = [
 "I forgive myself and set myself free.",
-// "I believe I can be all that I want to be.",
-// "I am in the process of becoming the best version of myself.",
-// "I have the freedom & power to create the life I desire.",
-// "I choose to be kind to myself and love myself unconditionally.",
-// "My possibilities are endless.",
-// "I am worthy of my dreams.",
-// "I am enough.",
-// "I deserve to be healthy and feel good.",
-// "I am full of energy and vitality and my mind is calm and peaceful.",
-// "Every day I am getting healthier and stronger.",
-// "I honor my body by trusting the signals that it sends me.",
-// "I manifest perfect health by making smart choices."
+"I believe I can be all that I want to be.",
+"I am in the process of becoming the best version of myself.",
+"I have the freedom & power to create the life I desire.",
+"I choose to be kind to myself and love myself unconditionally.",
+"My possibilities are endless.",
+"I am worthy of my dreams.",
+"I am enough.",
+"I deserve to be healthy and feel good.",
+"I am full of energy and vitality and my mind is calm and peaceful.",
+"Every day I am getting healthier and stronger.",
+"I honor my body by trusting the signals that it sends me.",
+"I manifest perfect health by making smart choices."
 ];
 
 var mantras = [
 "Breathing in, I send myself love. Breathing out, I send love to someone else.",
-// "Don’t let yesterday take up too much of today.",
-// "Every day is a second chance.",
-// "Tell the truth and love everyone.",
-// "I am free from sadness.",
-// "I am enough.",
-// "In the beginning it is you, in the middle it is you and in the end it is you.",
-// "I love myself.",
-// "I am present now.",
-// "Inhale the future, exhale the past.",
-// "This too shall pass.",
-// "Yesterday is not today.",
-// "The only constant is change.",
-// "Onward and upward.",
-// "I am the sky, the rest is weather.",
+"Don’t let yesterday take up too much of today.",
+"Every day is a second chance.",
+"Tell the truth and love everyone.",
+"I am free from sadness.",
+"I am enough.",
+"In the beginning it is you, in the middle it is you and in the end it is you.",
+"I love myself.",
+"I am present now.",
+"Inhale the future, exhale the past.",
+"This too shall pass.",
+"Yesterday is not today.",
+"The only constant is change.",
+"Onward and upward.",
+"I am the sky, the rest is weather.",
 ];
 
 // >>>QUERY SELECTORS<<<
@@ -41,6 +41,8 @@ var message = document.querySelector('.message');
 var affirmation = document.getElementById('affirmation');
 var mantra = document.getElementById('mantra');
 var deletedMessage = document.getElementById('deleted-message')
+var clearButton = document.querySelector('.clear-message-button')
+
 //>>>EVENT LISTENERS<<<
 messageButton.addEventListener("click", displayMessage)
 messageButton.addEventListener("click", deployDeleteButton);
@@ -61,6 +63,7 @@ function show(item) {
 }
 
 
+
 // >>> GLOBAL VARIABLES<<<
 var currentMessage
 
@@ -74,11 +77,11 @@ function displayMessage() {
     }
     hide(image)
     show(message)
+    show(clearButton)
   }
 }
 
 function setMessage(affOrMantra) {
-  debugger
   if (affOrMantra.length > 0) {
     currentMessage= affOrMantra[getRandomIndex(affOrMantra)]
     show(deleteButton)
@@ -89,26 +92,6 @@ function setMessage(affOrMantra) {
     message.innerText = currentMessage
 }
 
-
-// function setAffirmation() {
-//   if (affirmations.length > 0) {
-//     currentAffirmation = affirmations[getRandomIndex(affirmations)]
-//   } else if (affirmations.length === 0) {
-//     currentAffirmation = "You are out of affirmations"
-//   }
-//     message.innerText = currentAffirmation
-// }
-//
-// function setMantra() {
-//   if (mantras.length > 0) {
-//     currentMantra = mantras[getRandomIndex(mantras)]
-//   } else if (mantras.length === 0) {
-//     currentMantra = "You are out of mantras"
-//   }
-//     message.innerText = currentMantra
-// }
-
-
 function deployDeleteButton() {
   if (affirmation.checked || mantra.checked) {
     if (affirmations.length > 0 && mantras.length > 0)
@@ -116,19 +99,6 @@ function deployDeleteButton() {
   }
 }
 
-
-// function deleteMessage() {
-//   event.preventDefault(event)
-//   for (var i = 0; i < affirmations.length; i ++) {
-//     if (affirmations[i] === currentMessage) {
-//       affirmations.splice(i, 1);
-//     }
-//   }
-//   for (var i = 0; i < mantras.length; i ++) {
-//     if (mantras[i] === currentMessage) {
-//       mantras.splice(i, 1)
-//     }
-//   }
 function showDeletedMessage() {
   event.preventDefault(event)
   if (affirmation.checked || mantra.checked){
@@ -139,8 +109,9 @@ function showDeletedMessage() {
   }
 }
   hide(message)
+  hide(clearButton)
   show(deletedMessage)
-  setTimeout('hide(deletedMessage)'', 3000)
+  setTimeout('hide(deletedMessage)', 3000)
   show(image)
   hide(deleteButton)
 }
@@ -153,3 +124,36 @@ function removeFromArray(mantraOrAff) {
     }
   }
 }
+
+// function deleteMessage() {
+  //   event.preventDefault(event)
+  //   for (var i = 0; i < affirmations.length; i ++) {
+    //     if (affirmations[i] === currentMessage) {
+      //       affirmations.splice(i, 1);
+      //     }
+      //   }
+      //   for (var i = 0; i < mantras.length; i ++) {
+        //     if (mantras[i] === currentMessage) {
+          //       mantras.splice(i, 1)
+          //     }
+          //   }
+
+
+
+// function setAffirmation() {
+  //   if (affirmations.length > 0) {
+    //     currentAffirmation = affirmations[getRandomIndex(affirmations)]
+    //   } else if (affirmations.length === 0) {
+      //     currentAffirmation = "You are out of affirmations"
+      //   }
+      //     message.innerText = currentAffirmation
+      // }
+      //
+      // function setMantra() {
+        //   if (mantras.length > 0) {
+          //     currentMantra = mantras[getRandomIndex(mantras)]
+          //   } else if (mantras.length === 0) {
+            //     currentMantra = "You are out of mantras"
+            //   }
+            //     message.innerText = currentMantra
+            // }
