@@ -31,17 +31,25 @@ var mantras = [
 "Onward and upward.",
 "I am the sky, the rest is weather.",
 ];
+
+// >>>QUERY SELECTORS<<<
 var messageButton = document.querySelector(".recieve-message");
-var affirmationRadio = document.querySelector("#affirmation");
-var mantraRadio = document.querySelector("#mantra");
-var displayMessageBox = document.querySelector("#image-box")
-var image = document.querySelector(".meditate")
-var deleteButton = document.querySelector('.delete')
+var displayMessageBox = document.getElementById("image-box");
+var image = document.querySelector(".meditate");
+var deleteButton = document.querySelector('.delete');
+var message = document.querySelector('.message');
+var affirmation = document.getElementById('affirmation');
+var mantra = document.getElementById('mantra');
+var deletedMessage = document.getElementById('deleted-message')
+var clearButton = document.querySelector('.clear-message-button')
 
-messageButton.addEventListener("click", displayMessage);
+//>>>EVENT LISTENERS<<<
+messageButton.addEventListener("click", displayMessage)
 messageButton.addEventListener("click", deployDeleteButton);
+deleteButton.addEventListener("click", showDeletedMessage)
+clearButton.addEventListener("click", clearMessage)
 
-
+//>>> FUNCTIONS <<<
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length)
 };
@@ -55,18 +63,105 @@ function show(item) {
 }
 
 
+
+// >>> GLOBAL VARIABLES<<<
+var currentMessage
+
 function displayMessage() {
   event.preventDefault(event);
-  hide(image);
-  if (affirmation.checked) {
-    displayMessageBox.innerText = affirmations[getRandomIndex(affirmations)]
-  } else if (mantra.checked) {
-    displayMessageBox.innerText = mantras[getRandomIndex(mantras)]
+  if (affirmation.checked || mantra.checked){
+    if (affirmation.checked) {
+      setMessage(affirmations)
+    } else if (mantra.checked) {
+      setMessage(mantras)
+    }
+    hide(image)
+    show(message)
+    show(clearButton)
   }
+}
+
+function setMessage(affOrMantra) {
+  if (affOrMantra.length > 0) {
+    currentMessage= affOrMantra[getRandomIndex(affOrMantra)]
+    show(deleteButton)
+  } else if (affOrMantra.length === 0) {
+    hide(deleteButton)
+    currentMessage = 'Oops! None of these left!'
+  }
+    message.innerText = currentMessage
 }
 
 function deployDeleteButton() {
   if (affirmation.checked || mantra.checked) {
+    if (affirmations.length > 0 && mantras.length > 0)
     show(deleteButton)
   }
 }
+
+function showDeletedMessage() {
+  event.preventDefault(event)
+  if (affirmation.checked || mantra.checked){
+    if (affirmation.checked) {
+      removeFromArray(affirmations)
+    } else if (mantra.checked) {
+      removeFromArray(mantras)
+  }
+}
+  hide(message)
+  hide(clearButton)
+  show(deletedMessage)
+  setTimeout('hide(deletedMessage)', 1500)
+  show(image)
+  hide(deleteButton)
+}
+
+
+function removeFromArray(mantraOrAff) {
+  for ( var i = 0; i < mantraOrAff.length; i++) {
+    if (mantraOrAff[i] === currentMessage){
+      mantraOrAff.splice(i, 1);
+    }
+  }
+}
+
+function clearMessage() {
+  event.preventDefault(event);
+  hide(message)
+  show(image)
+  hide(clearButton)
+  hide(deleteButton)
+}
+
+// function deleteMessage() {
+  //   event.preventDefault(event)
+  //   for (var i = 0; i < affirmations.length; i ++) {
+    //     if (affirmations[i] === currentMessage) {
+      //       affirmations.splice(i, 1);
+      //     }
+      //   }
+      //   for (var i = 0; i < mantras.length; i ++) {
+        //     if (mantras[i] === currentMessage) {
+          //       mantras.splice(i, 1)
+          //     }
+          //   }
+
+
+
+// function setAffirmation() {
+  //   if (affirmations.length > 0) {
+    //     currentAffirmation = affirmations[getRandomIndex(affirmations)]
+    //   } else if (affirmations.length === 0) {
+      //     currentAffirmation = "You are out of affirmations"
+      //   }
+      //     message.innerText = currentAffirmation
+      // }
+      //
+      // function setMantra() {
+        //   if (mantras.length > 0) {
+          //     currentMantra = mantras[getRandomIndex(mantras)]
+          //   } else if (mantras.length === 0) {
+            //     currentMantra = "You are out of mantras"
+            //   }
+            //     message.innerText = currentMantra
+            // }
