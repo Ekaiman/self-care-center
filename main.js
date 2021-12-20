@@ -47,7 +47,7 @@ var clearButton = document.querySelector('.clear-message-button')
 messageButton.addEventListener("click", displayMessage)
 messageButton.addEventListener("click", deployDeleteButton);
 deleteButton.addEventListener("click", showDeletedMessage)
-
+clearButton.addEventListener("click", clearMessage)
 
 //>>> FUNCTIONS <<<
 function getRandomIndex(array) {
@@ -111,7 +111,7 @@ function showDeletedMessage() {
   hide(message)
   hide(clearButton)
   show(deletedMessage)
-  setTimeout('hide(deletedMessage)', 3000)
+  setTimeout('hide(deletedMessage)', 1500)
   show(image)
   hide(deleteButton)
 }
@@ -123,6 +123,14 @@ function removeFromArray(mantraOrAff) {
       mantraOrAff.splice(i, 1);
     }
   }
+}
+
+function clearMessage() {
+  event.preventDefault(event);
+  hide(message)
+  show(image)
+  hide(clearButton)
+  hide(deleteButton)
 }
 
 // function deleteMessage() {
