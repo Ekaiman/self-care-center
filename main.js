@@ -14,6 +14,8 @@ var affirmations = [
 "I manifest perfect health by making smart choices."
 ];
 
+var usedAffirmations = [];
+
 var mantras = [
 "Breathing in, I send myself love. Breathing out, I send love to someone else.",
 "Don’t let yesterday take up too much of today.",
@@ -48,6 +50,7 @@ messageButton.addEventListener("click", displayMessage)
 messageButton.addEventListener("click", deployDeleteButton);
 deleteButton.addEventListener("click", showDeletedMessage)
 clearButton.addEventListener("click", clearMessage)
+messageButton.addEventListener("click", noRepeats)
 
 //>>> FUNCTIONS <<<
 function getRandomIndex(array) {
@@ -67,6 +70,8 @@ function show(item) {
 // >>> GLOBAL VARIABLES<<<
 var currentMessage
 
+
+//>>> Random Message <<<
 function displayMessage() {
   event.preventDefault(event);
   if (affirmation.checked || mantra.checked){
@@ -92,6 +97,7 @@ function setMessage(affOrMantra) {
     message.innerText = currentMessage
 }
 
+//>>> Delete Message <<<
 function deployDeleteButton() {
   if (affirmation.checked || mantra.checked) {
     if (affirmations.length > 0 && mantras.length > 0)
@@ -125,6 +131,7 @@ function removeFromArray(mantraOrAff) {
   }
 }
 
+//>>>Clear Message<<<
 function clearMessage() {
   event.preventDefault(event);
   hide(message)
@@ -133,6 +140,40 @@ function clearMessage() {
   hide(deleteButton)
 }
 
+// >>>No Repeats<<<
+function noRepeats(){
+  if (affirmation.checked || mantra.checked) {
+    if (affirmation.checked) {
+      debugger
+      }
+      for (var i = 0; i < affirmations.length; i++) {
+        if (affirmations[i] === currentMessage) {
+        affirmations.splice(i, 1);
+        usedAffirmations.push(currentMessage);
+        if (affirmation.length === 0) {
+          currentMessage = "You've ran out of original messaged, you will now see repeats"
+          affirmations.push(usedAffirmations)
+          usedAffirmations = []
+
+        }
+      }
+    }
+  }
+}
+
+// function noRepeats() {
+//   for (var i = 0; i < mantraOrAff.length; i++) {
+//     if (mantraOrAff[i] === currentMessage) {
+//       mantraOrAff.splice(i, 0)
+//     }
+//   }
+// }
+//
+// function noRepeaters() {
+//   if (affirmation.checked || mantra.checked) {
+//     if (affirmation.checked)
+//   }
+// }
 // function deleteMessage() {
   //   event.preventDefault(event)
   //   for (var i = 0; i < affirmations.length; i ++) {
